@@ -12,7 +12,7 @@ fi
 
 # Vérifier que tout est bien à jour
 brew update
-
+ 
 ## Utilitaires pour les autres apps : Cask et mas (Mac App Store)
 echo 'Installation de mas, pour installer les apps du Mac App Store.'
 brew install mas
@@ -40,19 +40,60 @@ brew tap caskroom/cask
 
 ## Installations des logiciels
 echo 'Installation des outils en ligne de commande.'
-brew install wget cmake coreutils psutils git ffmpeg node libssh
-brew tap zyedidia/micro
-brew install micro
+brew install wget git node 
 gem install sass
 brew install git-flow-avh 
 npm install -g bower
-Brew install php70
+
+## Installation de ruby environnement 
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+
+## configuration
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
+echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+. ~/.bash_profile
+
+## afficher toutes les versions de ruby disponible
+rbenv install -l
+
+## installation ruby 2.4.0
+echo 'Installation de ruby'
+rbenv install 2.4.0
+rbenv local 2.4.0
+
+##installation de rails attention aux versions 4.7.x et 5.x et de bundler
+echo 'Installation de bundler'
+gem install bundler
+echo 'Installation de rails'
+gem install rails 
+
+## installation de rbenv variables à utiliser avec .rbenv-vars dans vote projet
+git clone https://github.com/rbenv/rbenv-vars.git $(rbenv root)/plugins/rbenv-vars
+
+## Installation de PHP 7.1
+echo 'Installation de PHP 7.1'
+brew update
+brew upgrade
+
+brew tap homebrew/dupes
+brew tap homebrew/versions
+brew tap homebrew/homebrew-php
+
+brew unlink php70
+brew install php71
+
+## Installation de Synfony
+echo 'Installation de Synfony'
+sudo curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony
+sudo chmod a+x /usr/local/bin/symfony
+
+## Installation de Ionic et de Cordova
+
+npm install -g ionic cordova
 
 echo 'Installation des apps : utilitaires.'
 brew cask install alfred  appcleaner 
-
-# Installation manuelle de SearchLink
-cd /tmp/ && curl -O http://cdn3.brettterpstra.com/downloads/SearchLink2.2.3.zip && unzip SearchLink2.2.3.zip && cd SearchLink2.2.3 && mv SearchLink.workflow ~/Library/Services/
 
 echo 'Installation des apps : bureautique.'
 install "Pages"
@@ -60,18 +101,13 @@ install "Keynote"
 install "Numbers"
 
 echo 'Installation des apps : développement.'
-brew cask install github-desktop atom wordpresscom 
+brew cask install github-desktop atom wordpresscom gitkraken 
 install "Xcode"
 
 echo 'Installation des apps : communication.'
 install « Dashlane »
 brew cask install google-chrome firefox transmission
 
-
-echo 'Installation des apps : photo et vidéo.'
-
-
-echo 'Installation des apps : loisir.'
 
 
 ## ************************* CONFIGURATION ********************************
