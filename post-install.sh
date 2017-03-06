@@ -172,4 +172,3 @@ brew cleanup
 rm -f -r /Library/Caches/Homebrew/*
 
 echo "ET VOILÀ !"
-echo "Après synchronisation des données cloud, lancer le script post-cloud.sh"
